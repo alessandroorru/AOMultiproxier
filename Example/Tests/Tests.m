@@ -11,7 +11,6 @@
 #import <OCMock/OCMock.h>
 
 #import "AOTestProtocol.h"
-#import "AOTestOwnerObject.h"
 #import "AOTestStrictDelegateObject.h"
 
 
