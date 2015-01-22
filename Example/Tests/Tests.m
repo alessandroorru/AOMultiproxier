@@ -120,6 +120,7 @@ describe(@"AOMultiproxier", ^{
     });
     
     describe(@"each attached object", ^{
+
         it(@"should receive method calls performed on multiproxier", ^{
             id protocolMock = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             [multiproxier attachObject:protocolMock];
@@ -135,6 +136,29 @@ describe(@"AOMultiproxier", ^{
             OCMVerifyAll(protocolMock);
         });
         
+        it(@"should receive also method calls of ancestor protocols performed on multiproxier", ^{
+            AOMultiproxier <UICollectionViewDelegateFlowLayout> * multiproxier = AOMultiproxierForProtocol(UICollectionViewDelegateFlowLayout);
+            
+            id cvProtocolMock = OCMStrictProtocolMock(@protocol(UICollectionViewDelegateFlowLayout));
+            id svProtocolMock = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
+            [multiproxier attachObject:cvProtocolMock];
+            [multiproxier attachObject:svProtocolMock];
+            
+            OCMExpect([cvProtocolMock collectionView:nil layout:nil sizeForItemAtIndexPath:nil]);
+            OCMExpect([cvProtocolMock scrollViewDidScroll:OCMOCK_ANY]);
+            OCMExpect([svProtocolMock scrollViewDidScroll:OCMOCK_ANY]);
+            
+            if ([multiproxier respondsToSelector:@selector(scrollViewDidScroll:)]) {
+                [multiproxier scrollViewDidScroll:nil];
+            }
+            if ([multiproxier respondsToSelector:@selector(collectionView:layout:sizeForItemAtIndexPath:)]) {
+                [multiproxier collectionView:nil layout:nil sizeForItemAtIndexPath:nil];
+            }
+            
+            OCMVerifyAll(cvProtocolMock);
+            OCMVerifyAll(svProtocolMock);
+        });
+
         it(@"should give a return value if the method returns it", ^{
             id protocolMock = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             OCMStub([protocolMock callWithReturnValue]).andReturn(@(1));
