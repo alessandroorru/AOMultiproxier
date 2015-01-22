@@ -120,10 +120,17 @@
         return;
     }
     
+    BOOL someoneResponded = NO;
     for (id object in self.attachedObjects) {
-        if (isMandatory || [object respondsToSelector:selector]) {
+        if ([object respondsToSelector:selector]) {
             [anInvocation invokeWithTarget:object];
+            someoneResponded = YES;
         }
+    }
+
+    // If a mandatory method has not been implemented by any attached object, this would provoke a crash
+    if (isMandatory && !someoneResponded) {
+        [super forwardInvocation:anInvocation];
     }
 }
 
