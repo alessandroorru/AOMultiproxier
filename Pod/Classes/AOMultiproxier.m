@@ -41,7 +41,7 @@
 - (void)attachObject:(id)object
 {
     if (object == nil) return;
-    if (![self _objectInheritsProtocolOrAncestor:object]) {
+    if (![self _object:object inheritsProtocolOrAncestorOfProtocol:self.protocol]) {
         NSLog(@"AOMultiproxier WARNING: tried to attach object %@ that doesn't conform to %@ or any of its ancestors", [object debugDescription], NSStringFromProtocol(self.protocol));
         return;
     }
@@ -212,23 +212,23 @@
     return NO;
 }
 
-- (BOOL)_objectInheritsProtocolOrAncestor:(id)object
+- (BOOL)_object:(id)object inheritsProtocolOrAncestorOfProtocol:(Protocol*)protocol
 {
-    if ([object conformsToProtocol:self.protocol]) {
+    if ([object conformsToProtocol:protocol]) {
         return YES;
     }
     
     BOOL conforms = NO;
     
     unsigned int count = 0;
-    Protocol * __unsafe_unretained * list = protocol_copyProtocolList(self.protocol, &count);
+    Protocol * __unsafe_unretained * list = protocol_copyProtocolList(protocol, &count);
     for (NSUInteger i = 0; i < count; i++) {
         Protocol * aProtocol = list[i];
 
         // Skip root protocol
         if ([NSStringFromProtocol(aProtocol) isEqualToString:@"NSObject"]) continue;
         
-        if ([object conformsToProtocol:aProtocol]) {
+        if ([self _object:object inheritsProtocolOrAncestorOfProtocol:aProtocol]) {
             conforms = YES;
             break;
         }
