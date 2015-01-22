@@ -14,6 +14,8 @@
 @property (nonatomic, strong) dispatch_queue_t innerQueue;
 @property (nonatomic, strong) Protocol * protocol;
 @property (nonatomic, strong) NSMutableSet * objects;
+
+@property (nonatomic, strong) NSCache * protocolCache;
 @end
 
 @implementation AOMultiproxier
@@ -29,6 +31,7 @@
     _protocol = protocol;
     _objects = [NSMutableSet set];
     _innerQueue = dispatch_queue_create("com.alessandroorru.aomultiproxier", DISPATCH_QUEUE_SERIAL);
+    _protocolCache = [[NSCache alloc] init];
     
     return self;
 }
@@ -147,6 +150,14 @@
 
 - (struct objc_method_description)_methodDescriptionForSelector:(SEL)selector isMandatory:(BOOL *)isMandatory
 {
+    NSValue * cachedMethod = [self.protocolCache objectForKey:NSStringFromSelector(selector)];
+    if (cachedMethod) {
+        struct objc_method_description method;
+        [cachedMethod getValue:&method];
+        return method;
+    }
+    
+
     struct objc_method_description method = {NULL, NULL};
  
     // First check on main protocol
@@ -169,6 +180,9 @@
         }
         free(list);
     }
+    
+    NSValue * boxedMethod = [NSValue valueWithBytes:&method objCType:@encode(struct objc_method_description)];
+    [self.protocolCache setObject:boxedMethod forKey:NSStringFromSelector(selector)];
     
     return method;
 }
