@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3920091E72E77F513B9BC1D3 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E79FDF68B0774C60D533F7 /* libPods-Tests.a */; };
 		3933760A02B6CC3DA3A79900 /* libPods-AOMultiproxier.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52899A74603E1EF27970B629 /* libPods-AOMultiproxier.a */; };
+		5B47BB5F1A7134F80038B4C1 /* Benchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B47BB5E1A7134F80038B4C1 /* Benchmark.m */; };
 		5BF7EB091A707782002BABC6 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB051A707781002BABC6 /* Tests.m */; };
 		5BF7EB0A1A707782002BABC6 /* AOTestStrictDelegateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB081A707782002BABC6 /* AOTestStrictDelegateObject.m */; };
 		5BF7EB0F1A707A1D002BABC6 /* AOTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB0E1A707A1D002BABC6 /* AOTableViewDelegate.m */; };
@@ -42,6 +43,8 @@
 		22FF5542D44EDC4DC6C4EDFE /* AOMultiproxier.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AOMultiproxier.podspec; path = ../AOMultiproxier.podspec; sourceTree = "<group>"; };
 		52899A74603E1EF27970B629 /* libPods-AOMultiproxier.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AOMultiproxier.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5507D71BABF0B5371F6645B8 /* Pods-AOMultiproxier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AOMultiproxier.release.xcconfig"; path = "Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier.release.xcconfig"; sourceTree = "<group>"; };
+		5B47BB5D1A7134F80038B4C1 /* Benchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
+		5B47BB5E1A7134F80038B4C1 /* Benchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Benchmark.m; sourceTree = "<group>"; };
 		5BF7EB051A707781002BABC6 /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		5BF7EB061A707781002BABC6 /* AOTestProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTestProtocol.h; sourceTree = "<group>"; };
 		5BF7EB071A707782002BABC6 /* AOTestStrictDelegateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTestStrictDelegateObject.h; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				5BF7EB051A707781002BABC6 /* Tests.m */,
+				5B47BB5D1A7134F80038B4C1 /* Benchmark.h */,
+				5B47BB5E1A7134F80038B4C1 /* Benchmark.m */,
 				5BF7EB061A707781002BABC6 /* AOTestProtocol.h */,
 				5BF7EB071A707782002BABC6 /* AOTestStrictDelegateObject.h */,
 				5BF7EB081A707782002BABC6 /* AOTestStrictDelegateObject.m */,
@@ -386,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B47BB5F1A7134F80038B4C1 /* Benchmark.m in Sources */,
 				5BF7EB0A1A707782002BABC6 /* AOTestStrictDelegateObject.m in Sources */,
 				5BF7EB091A707782002BABC6 /* Tests.m in Sources */,
 			);
