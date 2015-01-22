@@ -11,7 +11,7 @@
 
 #import <AOMultiproxier/AOMultiproxier.h>
 
-#define ITERATIONS 100000
+#define ITERATIONS 1000000
 
 @interface Benchmark()
 @property (nonatomic, strong) AOTestStrictDelegateObject * delegate1;

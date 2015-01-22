@@ -9,12 +9,18 @@
 #import "AOMultiproxier.h"
 #import <objc/runtime.h>
 
+#define CACHE_ENABLED 0
+
 @interface AOMultiproxier()
 @property (nonatomic, strong) dispatch_queue_t innerQueue;
 @property (nonatomic, strong) Protocol * protocol;
 @property (nonatomic, strong) NSMutableSet * objects;
 
-@property (nonatomic, strong) NSCache * protocolCache;
+#if CACHE_ENABLED
+@property (nonatomic, assign) CFMutableDictionaryRef respondsToSelectorCache;
+@property (nonatomic, assign) CFMutableDictionaryRef methodSignatureCache;
+@property (nonatomic, assign) CFMutableDictionaryRef methodDescriptionCache;
+#endif
 @end
 
 @implementation AOMultiproxier
@@ -30,7 +36,13 @@
     _protocol = protocol;
     _objects = [NSMutableSet set];
     _innerQueue = dispatch_queue_create("com.alessandroorru.aomultiproxier", DISPATCH_QUEUE_SERIAL);
-
+    
+#if CACHE_ENABLED
+    _respondsToSelectorCache = CFDictionaryCreateMutable(kCFAllocatorMalloc, 0, NULL, NULL);
+    _methodSignatureCache = CFDictionaryCreateMutable(kCFAllocatorMalloc, 0, NULL, &kCFTypeDictionaryValueCallBacks);
+    _methodDescriptionCache = CFDictionaryCreateMutable(kCFAllocatorMalloc, 0, NULL, NULL);
+#endif
+    
     return self;
 }
 
@@ -84,9 +96,30 @@
     return objects;
 }
 
+- (void)dealloc
+{
+#if CACHE_ENABLED
+    CFRelease(_respondsToSelectorCache);
+    _respondsToSelectorCache = NULL;
+    
+    CFRelease(_methodSignatureCache);
+    _methodSignatureCache = NULL;
+    
+    CFRelease(_methodDescriptionCache);
+    _methodDescriptionCache = NULL;
+#endif
+}
+
 
 #pragma mark - Forward methods
 - (BOOL)respondsToSelector:(SEL)selector {
+#if CACHE_ENABLED
+    CFBooleanRef cachedResponds = (CFBooleanRef)CFDictionaryGetValue(self.respondsToSelectorCache, selector);
+    if (cachedResponds != NULL) {
+        return CFBooleanGetValue(cachedResponds);
+    }
+#endif
+    
     BOOL responds = NO;
     BOOL isMandatory = NO;
     
@@ -99,6 +132,9 @@
         responds = [self _checkIfAttachedObjectsRespondToSelector:selector];
     }
 
+#if CACHE_ENABLED
+    CFDictionarySetValue(self.respondsToSelectorCache, selector, responds ? kCFBooleanTrue : kCFBooleanFalse);
+#endif
     return responds;
 }
 
@@ -138,6 +174,13 @@
 {
     NSMethodSignature * theMethodSignature;
 
+#if CACHE_ENABLED
+    theMethodSignature = CFDictionaryGetValue(self.methodSignatureCache, selector);
+    if (theMethodSignature != nil) {
+        return theMethodSignature;
+    }
+#endif
+
     BOOL isMandatory = NO;
     struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
     
@@ -147,6 +190,10 @@
     
     theMethodSignature = [NSMethodSignature signatureWithObjCTypes:methodDescription.types];
 
+#if CACHE_ENABLED
+    CFDictionarySetValue(self.methodSignatureCache, selector, (__bridge const void *)(theMethodSignature));
+#endif
+    
     return theMethodSignature;
 }
 
@@ -156,14 +203,13 @@
 
 - (struct objc_method_description)_methodDescriptionForSelector:(SEL)selector isMandatory:(BOOL *)isMandatory
 {
-    NSValue * cachedMethod = [self.protocolCache objectForKey:NSStringFromSelector(selector)];
-    if (cachedMethod) {
-        struct objc_method_description method;
-        [cachedMethod getValue:&method];
-        return method;
+#if CACHE_ENABLED
+    struct objc_method_description * cachedMethodDescription = (struct objc_method_description *)CFDictionaryGetValue(self.methodDescriptionCache, selector);
+    if (cachedMethodDescription != NULL) {
+        return *cachedMethodDescription;
     }
+#endif
     
-
     struct objc_method_description method = {NULL, NULL};
  
     // First check on main protocol
@@ -187,14 +233,20 @@
         free(list);
     }
     
-    NSValue * boxedMethod = [NSValue valueWithBytes:&method objCType:@encode(struct objc_method_description)];
-    [self.protocolCache setObject:boxedMethod forKey:NSStringFromSelector(selector)];
+#if CACHE_ENABLED
+    struct objc_method_description * heapHold = malloc(sizeof * heapHold);
+    if (heapHold == NULL) {
+    } else {
+        memcpy(heapHold, &method, sizeof *heapHold);
+    }
+    CFDictionarySetValue(self.methodDescriptionCache, selector, heapHold);
+#endif
     
     return method;
 }
 
 
-- (struct objc_method_description)_methodDescriptionInProtocol:(Protocol *)protocol selector:(SEL)selector isMandatory:(BOOL *)isMandatory
+- (struct objc_method_description)_methodDescriptionInProtocol:(Protocol *)protocol selector:(SEL)selector isMandatory:(BOOL *)isMandatory __attribute__((const))
 {
     struct objc_method_description method = {NULL, NULL};
 
