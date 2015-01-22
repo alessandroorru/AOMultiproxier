@@ -11,6 +11,7 @@
 #define AOMultiproxierForProtocol(__protocol__) ((AOMultiproxier <__protocol__> *)[AOMultiproxier multiproxierForProtocol:@protocol(__protocol__)])
 
 @interface AOMultiproxier : NSProxy
+
 @property (nonatomic, strong, readonly) Protocol * protocol;
 @property (nonatomic, strong, readonly) NSArray * attachedObjects;
 

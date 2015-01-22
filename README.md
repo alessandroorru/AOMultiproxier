@@ -18,17 +18,17 @@ it, simply add the following line to your Podfile:
 
 In your header:
 
-	@property (nonatomic, strong) UIScrollView * scrollView;
-	@property (nonatomic, strong) id <UIScrollViewDelegate> scrollViewDelegateProxy;
-	
+    @property (nonatomic, strong) UIScrollView * scrollView;
+    @property (nonatomic, strong) AOMultiproxier <UIScrollViewDelegate> scrollViewDelegateProxy;
+
 In your init:
 
-	self.scrollViewDelegateProxy = AOMultiproxierForProtocol(UIScrollViewDelegate);
-	
-	[self.scrollViewDelegateProxy attachObject:aDelegate];
-	[self.scrollViewDelegateProxy attachObject:anotherDelegate];	
-	
-	self.scrollView.delegate = scrollViewDelegateProxy;
+    self.scrollViewDelegateProxy = AOMultiproxierForProtocol(UIScrollViewDelegate);
+
+    [self.scrollViewDelegateProxy attachObject:aScrollViewDelegate];
+    [self.scrollViewDelegateProxy attachObject:anotherScrollViewDelegate];	
+
+    self.scrollView.delegate = self.scrollViewDelegateProxy;
 
 ## Author
 

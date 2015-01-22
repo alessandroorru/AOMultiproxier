@@ -7,38 +7,88 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15D98909058D3928C31F7D8D /* libPods-AOMultiproxier.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2745F3B670931C76DF1D516 /* libPods-AOMultiproxier.a */; };
-		5B47BB581A6FF6A50038B4C1 /* AOTestStrictDelegateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B47BB571A6FF6A50038B4C1 /* AOTestStrictDelegateObject.m */; };
+		3920091E72E77F513B9BC1D3 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E79FDF68B0774C60D533F7 /* libPods-Tests.a */; };
+		3933760A02B6CC3DA3A79900 /* libPods-AOMultiproxier.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52899A74603E1EF27970B629 /* libPods-AOMultiproxier.a */; };
+		5BF7EB091A707782002BABC6 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB051A707781002BABC6 /* Tests.m */; };
+		5BF7EB0A1A707782002BABC6 /* AOTestStrictDelegateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB081A707782002BABC6 /* AOTestStrictDelegateObject.m */; };
+		5BF7EB0F1A707A1D002BABC6 /* AOTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB0E1A707A1D002BABC6 /* AOTableViewDelegate.m */; };
+		5BF7EB121A707B0A002BABC6 /* AOScrollViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7EB111A707B0A002BABC6 /* AOScrollViewDelegate.m */; };
+		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
+		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
+		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
+		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
+		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
+		6003F59E195388D20070C39A /* AOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* AOAppDelegate.m */; };
+		6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main_iPhone.storyboard */; };
+		6003F5A7195388D20070C39A /* AOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* AOViewController.m */; };
+		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6003F5B3195388D20070C39A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6003F589195388D20070C39A;
+			remoteInfo = AOMultiproxier;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		367D60F0A35378B15E2B9062 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		47D5B939F16A177F9E96A7D0 /* AOMultiproxier.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AOMultiproxier.podspec; path = ../AOMultiproxier.podspec; sourceTree = "<group>"; };
-		5B47BB561A6FF6A50038B4C1 /* AOTestStrictDelegateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTestStrictDelegateObject.h; sourceTree = "<group>"; };
-		5B47BB571A6FF6A50038B4C1 /* AOTestStrictDelegateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTestStrictDelegateObject.m; sourceTree = "<group>"; };
-		5B47BB591A6FF6BF0038B4C1 /* AOTestProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTestProtocol.h; sourceTree = "<group>"; };
+		22FF5542D44EDC4DC6C4EDFE /* AOMultiproxier.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AOMultiproxier.podspec; path = ../AOMultiproxier.podspec; sourceTree = "<group>"; };
+		52899A74603E1EF27970B629 /* libPods-AOMultiproxier.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AOMultiproxier.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5507D71BABF0B5371F6645B8 /* Pods-AOMultiproxier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AOMultiproxier.release.xcconfig"; path = "Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier.release.xcconfig"; sourceTree = "<group>"; };
+		5BF7EB051A707781002BABC6 /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		5BF7EB061A707781002BABC6 /* AOTestProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTestProtocol.h; sourceTree = "<group>"; };
+		5BF7EB071A707782002BABC6 /* AOTestStrictDelegateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTestStrictDelegateObject.h; sourceTree = "<group>"; };
+		5BF7EB081A707782002BABC6 /* AOTestStrictDelegateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTestStrictDelegateObject.m; sourceTree = "<group>"; };
+		5BF7EB0D1A707A1D002BABC6 /* AOTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTableViewDelegate.h; sourceTree = "<group>"; };
+		5BF7EB0E1A707A1D002BABC6 /* AOTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTableViewDelegate.m; sourceTree = "<group>"; };
+		5BF7EB101A707B0A002BABC6 /* AOScrollViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOScrollViewDelegate.h; sourceTree = "<group>"; };
+		5BF7EB111A707B0A002BABC6 /* AOScrollViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOScrollViewDelegate.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* AOMultiproxier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AOMultiproxier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		6003F5AE195388D20070C39A /* AOMultiproxier.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AOMultiproxier.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F595195388D20070C39A /* AOMultiproxier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AOMultiproxier-Info.plist"; sourceTree = "<group>"; };
+		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6003F59B195388D20070C39A /* AOMultiproxier-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AOMultiproxier-Prefix.pch"; sourceTree = "<group>"; };
+		6003F59C195388D20070C39A /* AOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AOAppDelegate.h; sourceTree = "<group>"; };
+		6003F59D195388D20070C39A /* AOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AOAppDelegate.m; sourceTree = "<group>"; };
+		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		6003F5A5195388D20070C39A /* AOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AOViewController.h; sourceTree = "<group>"; };
+		6003F5A6195388D20070C39A /* AOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AOViewController.m; sourceTree = "<group>"; };
+		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		A52D0494A97D7F56CBB64D93 /* Pods-AOMultiproxier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AOMultiproxier.release.xcconfig"; path = "Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier.release.xcconfig"; sourceTree = "<group>"; };
-		AEE41D261FD59EF02405D63C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		D2745F3B670931C76DF1D516 /* libPods-AOMultiproxier.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AOMultiproxier.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F744C7C24606840C16E2A021 /* Pods-AOMultiproxier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AOMultiproxier.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier.debug.xcconfig"; sourceTree = "<group>"; };
+		62849F689A40B68511176F5E /* Pods-AOMultiproxier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AOMultiproxier.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier.debug.xcconfig"; sourceTree = "<group>"; };
+		75BF899727C40A6935D3E022 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB3F08C7B90F3BF40FB30724 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		B6E79FDF68B0774C60D533F7 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9E89647450D99658CB6AB9E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		FBDD4B434A727849A5CB7133 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6003F587195388D20070C39A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
+				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
+				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
+				3933760A02B6CC3DA3A79900 /* libPods-AOMultiproxier.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F5AB195388D20070C39A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,7 +96,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				15D98909058D3928C31F7D8D /* libPods-AOMultiproxier.a in Frameworks */,
+				3920091E72E77F513B9BC1D3 /* libPods-Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,10 +107,11 @@
 			isa = PBXGroup;
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
+				6003F593195388D20070C39A /* AOMultiproxier */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				64477AC2636C524DEA0CD82C /* Pods */,
+				89C5BF951A83880F9D1F6251 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				6003F58A195388D20070C39A /* AOMultiproxier.app */,
-				6003F5AE195388D20070C39A /* AOMultiproxier.xctest */,
+				6003F5AE195388D20070C39A /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,19 +131,49 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				D2745F3B670931C76DF1D516 /* libPods-AOMultiproxier.a */,
+				52899A74603E1EF27970B629 /* libPods-AOMultiproxier.a */,
+				B6E79FDF68B0774C60D533F7 /* libPods-Tests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6003F593195388D20070C39A /* AOMultiproxier */ = {
+			isa = PBXGroup;
+			children = (
+				6003F59C195388D20070C39A /* AOAppDelegate.h */,
+				6003F59D195388D20070C39A /* AOAppDelegate.m */,
+				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
+				6003F5A5195388D20070C39A /* AOViewController.h */,
+				6003F5A6195388D20070C39A /* AOViewController.m */,
+				5BF7EB0D1A707A1D002BABC6 /* AOTableViewDelegate.h */,
+				5BF7EB0E1A707A1D002BABC6 /* AOTableViewDelegate.m */,
+				5BF7EB101A707B0A002BABC6 /* AOScrollViewDelegate.h */,
+				5BF7EB111A707B0A002BABC6 /* AOScrollViewDelegate.m */,
+				6003F5A8195388D20070C39A /* Images.xcassets */,
+				6003F594195388D20070C39A /* Supporting Files */,
+			);
+			path = AOMultiproxier;
+			sourceTree = "<group>";
+		};
+		6003F594195388D20070C39A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6003F595195388D20070C39A /* AOMultiproxier-Info.plist */,
+				6003F596195388D20070C39A /* InfoPlist.strings */,
+				6003F599195388D20070C39A /* main.m */,
+				6003F59B195388D20070C39A /* AOMultiproxier-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				5BF7EB051A707781002BABC6 /* Tests.m */,
+				5BF7EB061A707781002BABC6 /* AOTestProtocol.h */,
+				5BF7EB071A707782002BABC6 /* AOTestStrictDelegateObject.h */,
+				5BF7EB081A707782002BABC6 /* AOTestStrictDelegateObject.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
-				5B47BB591A6FF6BF0038B4C1 /* AOTestProtocol.h */,
-				5B47BB561A6FF6A50038B4C1 /* AOTestStrictDelegateObject.h */,
-				5B47BB571A6FF6A50038B4C1 /* AOTestStrictDelegateObject.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -110,18 +191,20 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				47D5B939F16A177F9E96A7D0 /* AOMultiproxier.podspec */,
-				AEE41D261FD59EF02405D63C /* README.md */,
-				367D60F0A35378B15E2B9062 /* LICENSE */,
+				22FF5542D44EDC4DC6C4EDFE /* AOMultiproxier.podspec */,
+				C9E89647450D99658CB6AB9E /* README.md */,
+				FBDD4B434A727849A5CB7133 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		64477AC2636C524DEA0CD82C /* Pods */ = {
+		89C5BF951A83880F9D1F6251 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F744C7C24606840C16E2A021 /* Pods-AOMultiproxier.debug.xcconfig */,
-				A52D0494A97D7F56CBB64D93 /* Pods-AOMultiproxier.release.xcconfig */,
+				62849F689A40B68511176F5E /* Pods-AOMultiproxier.debug.xcconfig */,
+				5507D71BABF0B5371F6645B8 /* Pods-AOMultiproxier.release.xcconfig */,
+				75BF899727C40A6935D3E022 /* Pods-Tests.debug.xcconfig */,
+				AB3F08C7B90F3BF40FB30724 /* Pods-Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -129,23 +212,43 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F5AD195388D20070C39A /* AOMultiproxier */ = {
+		6003F589195388D20070C39A /* AOMultiproxier */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "AOMultiproxier" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "AOMultiproxier" */;
 			buildPhases = (
-				B321BF705B90DD000A354677 /* Check Pods Manifest.lock */,
-				6003F5AA195388D20070C39A /* Sources */,
-				6003F5AB195388D20070C39A /* Frameworks */,
-				6003F5AC195388D20070C39A /* Resources */,
-				3631BDD105FD86C3C6595C17 /* Copy Pods Resources */,
+				A87A12D81D94BC0219D57E12 /* Check Pods Manifest.lock */,
+				6003F586195388D20070C39A /* Sources */,
+				6003F587195388D20070C39A /* Frameworks */,
+				6003F588195388D20070C39A /* Resources */,
+				E15FAF6D481A6BE973A679BD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = AOMultiproxier;
+			productName = AOMultiproxier;
+			productReference = 6003F58A195388D20070C39A /* AOMultiproxier.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6003F5AD195388D20070C39A /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				6477D816186F67BC4B85A451 /* Check Pods Manifest.lock */,
+				6003F5AA195388D20070C39A /* Sources */,
+				6003F5AB195388D20070C39A /* Frameworks */,
+				6003F5AC195388D20070C39A /* Resources */,
+				B320F36590579EEC3BD7DF07 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6003F5B4195388D20070C39A /* PBXTargetDependency */,
+			);
+			name = Tests;
 			productName = AOMultiproxierTests;
-			productReference = 6003F5AE195388D20070C39A /* AOMultiproxier.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -176,12 +279,23 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F5AD195388D20070C39A /* AOMultiproxier */,
+				6003F589195388D20070C39A /* AOMultiproxier */,
+				6003F5AD195388D20070C39A /* Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6003F588195388D20070C39A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
+				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F5AC195388D20070C39A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -193,22 +307,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3631BDD105FD86C3C6595C17 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B321BF705B90DD000A354677 /* Check Pods Manifest.lock */ = {
+		6477D816186F67BC4B85A451 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -223,21 +322,102 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		A87A12D81D94BC0219D57E12 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B320F36590579EEC3BD7DF07 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E15FAF6D481A6BE973A679BD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AOMultiproxier/Pods-AOMultiproxier-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6003F586195388D20070C39A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6003F59E195388D20070C39A /* AOAppDelegate.m in Sources */,
+				5BF7EB121A707B0A002BABC6 /* AOScrollViewDelegate.m in Sources */,
+				6003F5A7195388D20070C39A /* AOViewController.m in Sources */,
+				5BF7EB0F1A707A1D002BABC6 /* AOTableViewDelegate.m in Sources */,
+				6003F59A195388D20070C39A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F5AA195388D20070C39A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
-				5B47BB581A6FF6A50038B4C1 /* AOTestStrictDelegateObject.m in Sources */,
+				5BF7EB0A1A707782002BABC6 /* AOTestStrictDelegateObject.m in Sources */,
+				5BF7EB091A707782002BABC6 /* Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6003F589195388D20070C39A /* AOMultiproxier */;
+			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		6003F596195388D20070C39A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6003F597195388D20070C39A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6003F59F195388D20070C39A /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6003F5A0195388D20070C39A /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
 		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -321,10 +501,41 @@
 			};
 			name = Release;
 		};
+		6003F5C0195388D20070C39A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62849F689A40B68511176F5E /* Pods-AOMultiproxier.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AOMultiproxier/AOMultiproxier-Prefix.pch";
+				INFOPLIST_FILE = "AOMultiproxier/AOMultiproxier-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6003F5C1195388D20070C39A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5507D71BABF0B5371F6645B8 /* Pods-AOMultiproxier.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AOMultiproxier/AOMultiproxier-Prefix.pch";
+				INFOPLIST_FILE = "AOMultiproxier/AOMultiproxier-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F744C7C24606840C16E2A021 /* Pods-AOMultiproxier.debug.xcconfig */;
+			baseConfigurationReference = 75BF899727C40A6935D3E022 /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AOMultiproxier.app/AOMultiproxier";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -345,8 +556,9 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A52D0494A97D7F56CBB64D93 /* Pods-AOMultiproxier.release.xcconfig */;
+			baseConfigurationReference = AB3F08C7B90F3BF40FB30724 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AOMultiproxier.app/AOMultiproxier";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -373,7 +585,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "AOMultiproxier" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "AOMultiproxier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6003F5C0195388D20070C39A /* Debug */,
+				6003F5C1195388D20070C39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,

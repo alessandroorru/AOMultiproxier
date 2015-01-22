@@ -8,9 +8,8 @@
 
 #import "AOTestStrictDelegateObject.h"
 
+
 @implementation AOTestStrictDelegateObject
 - (void)call
-{
-    NSLog(@"Method called");
-}
+{ }
 @end

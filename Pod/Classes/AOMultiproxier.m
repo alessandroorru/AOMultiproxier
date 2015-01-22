@@ -24,23 +24,27 @@
     return multiproxier;
 }
 
-+ (BOOL)conformsToProtocol:(Protocol*)protocol
-{
-    return YES;
-}
-
 - (instancetype)initWithProtocol:(Protocol*)protocol
 {
     _protocol = protocol;
     _objects = [NSMutableSet set];
     _innerQueue = dispatch_queue_create("com.alessandroorru.aomultiproxier", DISPATCH_QUEUE_SERIAL);
+    
     return self;
+}
+
++ (BOOL)conformsToProtocol:(Protocol*)protocol
+{
+    return YES;
 }
 
 - (void)attachObject:(id)object
 {
     if (object == nil) return;
-    if (![object conformsToProtocol:self.protocol]) return;
+    if (![self _objectInheritsProtocolOrAncestor:object]) {
+        NSLog(@"AOMultiproxier WARNING: tried to attach object %@ that doesn't conform to %@ or any of its ancestors", [object debugDescription], NSStringFromProtocol(self.protocol));
+        return;
+    }
     
     dispatch_sync(self.innerQueue, ^{
         [self.objects addObject:object];
@@ -83,12 +87,33 @@
 
 
 #pragma mark - Forward methods
+
+- (BOOL)respondsToSelector:(SEL)selector {
+    BOOL isMandatory = NO;
+    
+    struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
+    
+    if (isMandatory) {
+        return YES;
+    }
+    else if (methodDescription.name != NULL) {
+        return [self _checkIfAttachedObjectsRespondToSelector:selector];
+    }
+    
+    return NO;
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return protocol_conformsToProtocol(self.protocol, aProtocol);
+}
+
+
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
     SEL selector = [anInvocation selector];
     BOOL isMandatory = NO;
 
-    struct objc_method_description methodDescription = [self methodDescriptionForSelector:selector isMandatory:&isMandatory];
+    struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
     
     if (methodDescription.name == NULL) {
         [super forwardInvocation:anInvocation];
@@ -102,10 +127,10 @@
     }
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     BOOL isMandatory = NO;
-    struct objc_method_description methodDescription = [self methodDescriptionForSelector:aSelector isMandatory:&isMandatory];
+    struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
     
     if (methodDescription.name == NULL) {
         return nil;
@@ -116,15 +141,95 @@
     return theMethodSignature;
 }
 
-- (struct objc_method_description) methodDescriptionForSelector:(SEL)selector isMandatory:(BOOL *)isMandatory
+
+
+#pragma mark - Utility methods
+
+- (struct objc_method_description)_methodDescriptionForSelector:(SEL)selector isMandatory:(BOOL *)isMandatory
 {
-    struct objc_method_description mandatoryMethod = protocol_getMethodDescription(self.protocol, selector, YES, YES);
-    if (mandatoryMethod.name != NULL) {
-        *isMandatory = YES;
-        return mandatoryMethod;
+    struct objc_method_description method = {NULL, NULL};
+ 
+    // First check on main protocol
+    method = [self _methodDescriptionInProtocol:self.protocol selector:selector isMandatory:isMandatory];
+    
+    // If no method is known on main protocol, try on ancestor protocols
+    if (method.name == NULL) {
+        unsigned int count = 0;
+        Protocol * __unsafe_unretained * list = protocol_copyProtocolList(self.protocol, &count);
+        for (NSUInteger i = 0; i < count; i++) {
+            Protocol * aProtocol = list[i];
+
+            // Skip root protocol
+            if ([NSStringFromProtocol(aProtocol) isEqualToString:@"NSObject"]) continue;
+            
+            method = [self _methodDescriptionInProtocol:aProtocol selector:selector isMandatory:isMandatory];
+            if (method.name != NULL) {
+                break;
+            }
+        }
+        free(list);
     }
     
-    *isMandatory = NO;
-    return protocol_getMethodDescription(self.protocol, selector, NO, YES);
+    return method;
 }
+
+
+- (struct objc_method_description)_methodDescriptionInProtocol:(Protocol *)protocol selector:(SEL)selector isMandatory:(BOOL *)isMandatory
+{
+    struct objc_method_description method = {NULL, NULL};
+
+    method = protocol_getMethodDescription(protocol, selector, YES, YES);
+    if (method.name != NULL) {
+        *isMandatory = YES;
+        return method;
+    }
+    
+    method = protocol_getMethodDescription(protocol, selector, NO, YES);
+    if (method.name != NULL) {
+        *isMandatory = NO;
+    }
+    
+    return method;
+}
+
+
+
+- (BOOL)_checkIfAttachedObjectsRespondToSelector:(SEL)selector
+{
+    for (id object in self.attachedObjects) {
+        if ([object respondsToSelector:selector]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (BOOL)_objectInheritsProtocolOrAncestor:(id)object
+{
+    if ([object conformsToProtocol:self.protocol]) {
+        return YES;
+    }
+    
+    BOOL conforms = NO;
+    
+    unsigned int count = 0;
+    Protocol * __unsafe_unretained * list = protocol_copyProtocolList(self.protocol, &count);
+    for (NSUInteger i = 0; i < count; i++) {
+        Protocol * aProtocol = list[i];
+
+        // Skip root protocol
+        if ([NSStringFromProtocol(aProtocol) isEqualToString:@"NSObject"]) continue;
+        
+        if ([object conformsToProtocol:aProtocol]) {
+            conforms = YES;
+            break;
+        }
+    }
+    free(list);
+    
+    return conforms;
+}
+
 @end
+

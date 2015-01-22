@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AOMultiproxier: 0fa31e90b6ed04a70187639d18b26386727e3cfd
+  AOMultiproxier: 02e9ae3ad90f8619d1a44616011efc4d3d8b65e6
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
   OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a

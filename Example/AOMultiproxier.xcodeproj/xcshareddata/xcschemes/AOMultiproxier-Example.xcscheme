@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "AOMultiproxier.xctest"
+               BlueprintIdentifier = "6003F589195388D20070C39A"
+               BuildableName = "AOMultiproxier.app"
                BlueprintName = "AOMultiproxier"
                ReferencedContainer = "container:AOMultiproxier.xcodeproj">
             </BuildableReference>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "AOMultiproxier.xctest"
-               BlueprintName = "AOMultiproxier"
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
                ReferencedContainer = "container:AOMultiproxier.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,8 +42,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F5AD195388D20070C39A"
-            BuildableName = "AOMultiproxier.xctest"
+            BlueprintIdentifier = "6003F589195388D20070C39A"
+            BuildableName = "AOMultiproxier.app"
             BlueprintName = "AOMultiproxier"
             ReferencedContainer = "container:AOMultiproxier.xcodeproj">
          </BuildableReference>
@@ -61,8 +61,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F5AD195388D20070C39A"
-            BuildableName = "AOMultiproxier.xctest"
+            BlueprintIdentifier = "6003F589195388D20070C39A"
+            BuildableName = "AOMultiproxier.app"
             BlueprintName = "AOMultiproxier"
             ReferencedContainer = "container:AOMultiproxier.xcodeproj">
          </BuildableReference>
@@ -79,8 +79,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F5AD195388D20070C39A"
-            BuildableName = "AOMultiproxier.xctest"
+            BlueprintIdentifier = "6003F589195388D20070C39A"
+            BuildableName = "AOMultiproxier.app"
             BlueprintName = "AOMultiproxier"
             ReferencedContainer = "container:AOMultiproxier.xcodeproj">
          </BuildableReference>
