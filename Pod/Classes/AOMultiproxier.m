@@ -9,7 +9,6 @@
 #import "AOMultiproxier.h"
 #import <objc/runtime.h>
 
-
 @interface AOMultiproxier()
 @property (nonatomic, strong) dispatch_queue_t innerQueue;
 @property (nonatomic, strong) Protocol * protocol;
@@ -29,7 +28,7 @@
     _protocol = protocol;
     _objects = [NSMutableSet set];
     _innerQueue = dispatch_queue_create("com.alessandroorru.aomultiproxier", DISPATCH_QUEUE_SERIAL);
-    
+
     return self;
 }
 
@@ -84,23 +83,21 @@
 }
 
 
-
-
 #pragma mark - Forward methods
-
 - (BOOL)respondsToSelector:(SEL)selector {
+    BOOL responds = NO;
     BOOL isMandatory = NO;
     
     struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
     
     if (isMandatory) {
-        return YES;
+        responds = YES;
     }
     else if (methodDescription.name != NULL) {
-        return [self _checkIfAttachedObjectsRespondToSelector:selector];
+        responds = [self _checkIfAttachedObjectsRespondToSelector:selector];
     }
-    
-    return NO;
+
+    return responds;
 }
 
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
@@ -111,6 +108,7 @@
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
     SEL selector = [anInvocation selector];
+
     BOOL isMandatory = NO;
 
     struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
@@ -121,7 +119,7 @@
     }
     
     BOOL someoneResponded = NO;
-    for (id object in self.attachedObjects) {
+    for (id object in self.objects) {
         if ([object respondsToSelector:selector]) {
             [anInvocation invokeWithTarget:object];
             someoneResponded = YES;
@@ -136,6 +134,8 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
+    NSMethodSignature * theMethodSignature;
+
     BOOL isMandatory = NO;
     struct objc_method_description methodDescription = [self _methodDescriptionForSelector:selector isMandatory:&isMandatory];
     
@@ -143,8 +143,8 @@
         return nil;
     }
     
-    NSMethodSignature * theMethodSignature = [NSMethodSignature signatureWithObjCTypes:methodDescription.types];
-    
+    theMethodSignature = [NSMethodSignature signatureWithObjCTypes:methodDescription.types];
+
     return theMethodSignature;
 }
 
@@ -203,7 +203,7 @@
 
 - (BOOL)_checkIfAttachedObjectsRespondToSelector:(SEL)selector
 {
-    for (id object in self.attachedObjects) {
+    for (id object in self.objects) {
         if ([object respondsToSelector:selector]) {
             return YES;
         }
