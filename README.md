@@ -23,10 +23,7 @@ In your header:
 
 In your init:
 
-    self.scrollViewDelegateProxy = AOMultiproxierForProtocol(UIScrollViewDelegate);
-
-    [self.scrollViewDelegateProxy attachObject:aScrollViewDelegate];
-    [self.scrollViewDelegateProxy attachObject:anotherScrollViewDelegate];	
+    self.scrollViewDelegateProxy = AOMultiproxierForProtocol(UIScrollViewDelegate, aScrollViewDelegate, anotherScrollViewDelegate);
 
     self.scrollView.delegate = self.scrollViewDelegateProxy;
 
