@@ -19,7 +19,7 @@ describe(@"AOMultiproxier", ^{
 
     describe(@"create a multiproxier", ^{
 
-        it(@"should attach all objects if they conforms to the main protocol", ^{
+        it(@"should attach all objects if they conform to the main protocol", ^{
             id obj1 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             id obj2 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             id obj3 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
@@ -28,7 +28,7 @@ describe(@"AOMultiproxier", ^{
             expect(multiproxier.attachedObjects.count).to.equal(3);
         });
         
-        it(@"should attach all objects if they conforms to the main protocol or to ancestors", ^{
+        it(@"should attach all objects if they conform to the main protocol or to ancestors", ^{
             id obj1 = OCMStrictProtocolMock(@protocol(UITableViewDelegate));
             id obj2 = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
             id obj3 = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
@@ -37,7 +37,7 @@ describe(@"AOMultiproxier", ^{
             expect(multiproxier.attachedObjects.count).to.equal(3);
         });
 
-        it(@"should attach only the objects that conforms (or inherit a conforming protocol)", ^{
+        it(@"should attach only the objects that conform (or inherit a conforming protocol)", ^{
             id obj1 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             id obj2 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             id obj3 = [NSObject new];
@@ -66,7 +66,7 @@ describe(@"AOMultiproxier", ^{
     
     describe(@"each attached object", ^{
 
-        it(@"should receive method calls performed on multiproxier", ^{
+        it(@"should receive calls performed on multiproxier of methods defined on main protocol", ^{
             id protocolMock = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, protocolMock);
 
@@ -81,7 +81,7 @@ describe(@"AOMultiproxier", ^{
             OCMVerifyAll(protocolMock);
         });
         
-        it(@"should receive also method calls of ancestor protocols performed on multiproxier", ^{
+        it(@"should receive calls performed on multiproxier of methods defined on protocol ancestors", ^{
             id cvProtocolMock = OCMStrictProtocolMock(@protocol(UICollectionViewDelegateFlowLayout));
             id svProtocolMock = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
 
@@ -102,7 +102,7 @@ describe(@"AOMultiproxier", ^{
             OCMVerifyAll(svProtocolMock);
         });
 
-        it(@"should give a return value if the method returns it", ^{
+        it(@"should return a value if the method returns it", ^{
             id protocolMock = OCMStrictProtocolMock(@protocol(AOTestProtocol));
             OCMStub([protocolMock callWithReturnValue]).andReturn(@(1));
             
