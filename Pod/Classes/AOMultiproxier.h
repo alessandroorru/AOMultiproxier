@@ -8,17 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#define AOMultiproxierForProtocol(__protocol__) ((AOMultiproxier <__protocol__> *)[AOMultiproxier multiproxierForProtocol:@protocol(__protocol__)])
+#define AOMultiproxierForProtocol(__protocol__, ...) ((AOMultiproxier <__protocol__> *)[AOMultiproxier multiproxierForProtocol:@protocol(__protocol__) withObjects:((NSArray *)[NSArray arrayWithObjects:__VA_ARGS__,nil])])
 
 @interface AOMultiproxier : NSProxy
 
 @property (nonatomic, strong, readonly) Protocol * protocol;
 @property (nonatomic, strong, readonly) NSArray * attachedObjects;
 
-+ (instancetype)multiproxierForProtocol:(Protocol*)protocol;
-- (void)attachObject:(id)object;
-- (void)attachObjects:(NSArray*)objects;
-
-- (void)detachObject:(id)object;
-- (void)detachAllObjects;
++ (instancetype)multiproxierForProtocol:(Protocol*)protocol withObjects:(NSArray*)objects;
 @end

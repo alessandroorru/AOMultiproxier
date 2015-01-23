@@ -33,10 +33,7 @@
     
     self.tableViewDelegate = [[AOTableViewDelegate alloc] init];
 
-    self.multiproxyDelegate = AOMultiproxierForProtocol(UITableViewDelegate);
-    
-    [self.multiproxyDelegate attachObject:self.scrollViewDelegate];
-    [self.multiproxyDelegate attachObject:self.tableViewDelegate];
+    self.multiproxyDelegate = AOMultiproxierForProtocol(UITableViewDelegate, self.scrollViewDelegate, self.tableViewDelegate);
     
     self.tableView.delegate = self.multiproxyDelegate;
     self.tableView.dataSource = self;

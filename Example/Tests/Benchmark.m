@@ -56,9 +56,7 @@
 
 - (void)testPerformSelectorWithMultiproxier
 {
-    AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol);
-    [multiproxier attachObject:self.delegate1];
-    [multiproxier attachObject:self.delegate2];
+    AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, (@[self.delegate1, self.delegate2]));
 
     [self measureBlock:^{
         for (int i=0; i<ITERATIONS; i++) {
