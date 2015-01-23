@@ -16,114 +16,59 @@
 
 SpecBegin(InitialSpecs)
 describe(@"AOMultiproxier", ^{
-    __block AOMultiproxier <AOTestProtocol> * multiproxier;
-    
-    beforeEach(^{
-        multiproxier = AOMultiproxierForProtocol(AOTestProtocol);
-    });
 
-    describe(@"attaching an object", ^{
-        it(@"should have no effects if no object is provided", ^{
-            [multiproxier attachObject:nil];
-            expect(multiproxier.attachedObjects.count).to.equal(0);
+    describe(@"create a multiproxier", ^{
+
+        it(@"should attach all objects if they conforms to the main protocol", ^{
+            id obj1 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
+            id obj2 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
+            id obj3 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
+            AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, obj1, obj2, obj3);
+
+            expect(multiproxier.attachedObjects.count).to.equal(3);
         });
         
-        it(@"should have no effects if an object that doesn't conform to the given protocol is attached", ^{
-            NSObject * anyObject = [[NSObject alloc] init];
-            [multiproxier attachObject:anyObject];
-            expect(multiproxier.attachedObjects.count).to.equal(0);
+        it(@"should attach all objects if they conforms to the main protocol or to ancestors", ^{
+            id obj1 = OCMStrictProtocolMock(@protocol(UITableViewDelegate));
+            id obj2 = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
+            id obj3 = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
+            AOMultiproxier <UITableViewDelegate> * multiproxier = AOMultiproxierForProtocol(UITableViewDelegate, obj1, obj2, obj3);
+            
+            expect(multiproxier.attachedObjects.count).to.equal(3);
         });
 
-        it(@"should attach an object if a valid one is provided", ^{
-            AOTestStrictDelegateObject * delegateObject1 = [[AOTestStrictDelegateObject alloc] init];
-            [multiproxier attachObject:delegateObject1];
-            expect(multiproxier.attachedObjects.count).to.equal(1);
-            
-            AOTestStrictDelegateObject * delegateObject2 = [[AOTestStrictDelegateObject alloc] init];
-            [multiproxier attachObject:delegateObject2];
+        it(@"should attach only the objects that conforms (or inherit a conforming protocol)", ^{
+            id obj1 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
+            id obj2 = OCMStrictProtocolMock(@protocol(AOTestProtocol));
+            id obj3 = [NSObject new];
+            AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, obj1, obj2, obj3);
+
             expect(multiproxier.attachedObjects.count).to.equal(2);
         });
-        
-        it(@"should not attach an object if it is already attached", ^{
-            AOTestStrictDelegateObject * delegateObject = [[AOTestStrictDelegateObject alloc] init];
-            [multiproxier attachObject:delegateObject];
-            [multiproxier attachObject:delegateObject];
-            expect(multiproxier.attachedObjects.count).to.equal(1);
-        });
-    });
-    
-    describe(@"attaching multiple objects", ^{
-        it(@"should have no effects if no array is provided", ^{
-            [multiproxier attachObjects:nil];
-            expect(multiproxier.attachedObjects.count).to.equal(0);
-        });
-        
-        it(@"should have no effects if an empty is provided", ^{
-            [multiproxier attachObjects:@[]];
-            expect(multiproxier.attachedObjects.count).to.equal(0);
-        });
 
-        it(@"should include only the valid objects", ^{
-            AOTestStrictDelegateObject * delegateObject = [[AOTestStrictDelegateObject alloc] init];
-            NSObject * invalidObject = [NSObject new];
-            [multiproxier attachObjects:@[delegateObject, invalidObject]];
-            expect(multiproxier.attachedObjects.count).to.equal(1);
+        it(@"should return nil if no objects are provided", ^{
+            AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, nil);
+            expect(multiproxier).to.beNil;
+            
+            multiproxier = AOMultiproxierForProtocol(AOTestProtocol, @[]);
+            expect(multiproxier).to.beNil;
+        });
+        
+        it(@"should return nil if there isn't at least one object that conforms to the main protocol", ^{
+            id obj1 = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
+            id obj2 = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
+            AOMultiproxier <UITableViewDelegate> * multiproxier = AOMultiproxierForProtocol(UITableViewDelegate, obj1, obj2);
+            
+            expect(multiproxier).to.beNil;
         });
     });
     
-    describe(@"detaching all objects", ^{
-        it(@"should clear the attached objects", ^{
-            AOTestStrictDelegateObject * delegateObject1 = [[AOTestStrictDelegateObject alloc] init];
-            AOTestStrictDelegateObject * delegateObject2 = [[AOTestStrictDelegateObject alloc] init];
-            [multiproxier attachObjects:@[delegateObject1, delegateObject2]];
-            [multiproxier detachAllObjects];
-            expect(multiproxier.attachedObjects.count).to.equal(0);
-        });
-    });
-    
-    describe(@"detaching an object", ^{
-        __block AOTestStrictDelegateObject * attachedObject;
-        
-        beforeEach(^{
-            attachedObject = [[AOTestStrictDelegateObject alloc] init];
-            [multiproxier attachObject:attachedObject];
-        });
-        
-        it(@"should have no effect if no object is provided", ^{
-            [multiproxier detachObject:nil];
-            expect(multiproxier.attachedObjects.count).to.equal(1);
-        });
-        
-        it(@"should have no effect if an unattached object is provided", ^{
-            NSObject * unattachedObject = [[NSObject alloc] init];
-            [multiproxier detachObject:unattachedObject];
-            expect(multiproxier.attachedObjects.count).to.equal(1);
-        });
-        
-        it(@"should detach an object if an attached one is provided", ^{
-            [multiproxier detachObject:attachedObject];
-            expect(multiproxier.attachedObjects.count).to.equal(0);
-        });
-    });
-    
-    describe(@"attached objects array", ^{
-        it(@"should be a empty if no object is attached", ^{
-            expect(multiproxier.attachedObjects.count).to.equal(0);
-        });
-        
-        it(@"should contain only the right objects if some are provided", ^{
-            AOTestStrictDelegateObject * attachedObject = [[AOTestStrictDelegateObject alloc] init];
-            [multiproxier attachObject:attachedObject];
-            expect(multiproxier.attachedObjects.count).to.equal(1);
-            expect([multiproxier.attachedObjects containsObject:attachedObject]).to.equal(true);
-        });
-    });
     
     describe(@"each attached object", ^{
 
         it(@"should receive method calls performed on multiproxier", ^{
             id protocolMock = OCMStrictProtocolMock(@protocol(AOTestProtocol));
-            [multiproxier attachObject:protocolMock];
+            AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, protocolMock);
 
             OCMExpect([protocolMock call]);
             OCMExpect([protocolMock callWithReturnValue]);
@@ -137,12 +82,10 @@ describe(@"AOMultiproxier", ^{
         });
         
         it(@"should receive also method calls of ancestor protocols performed on multiproxier", ^{
-            AOMultiproxier <UICollectionViewDelegateFlowLayout> * multiproxier = AOMultiproxierForProtocol(UICollectionViewDelegateFlowLayout);
-            
             id cvProtocolMock = OCMStrictProtocolMock(@protocol(UICollectionViewDelegateFlowLayout));
             id svProtocolMock = OCMStrictProtocolMock(@protocol(UIScrollViewDelegate));
-            [multiproxier attachObject:cvProtocolMock];
-            [multiproxier attachObject:svProtocolMock];
+
+            AOMultiproxier <UICollectionViewDelegateFlowLayout> * multiproxier = AOMultiproxierForProtocol(UICollectionViewDelegateFlowLayout, cvProtocolMock, svProtocolMock);
             
             OCMExpect([cvProtocolMock collectionView:nil layout:nil sizeForItemAtIndexPath:nil]);
             OCMExpect([cvProtocolMock scrollViewDidScroll:OCMOCK_ANY]);
@@ -166,20 +109,19 @@ describe(@"AOMultiproxier", ^{
             id protocolMock2 = OCMPartialMock([[AOTestStrictDelegateObject alloc] init]);
             [[protocolMock2 reject] callWithReturnValue];
 
-            [multiproxier attachObject:protocolMock];
-            [multiproxier attachObject:protocolMock2];
+            AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, protocolMock, protocolMock2);
 
             NSNumber * returnValue = [multiproxier callWithReturnValue];
             expect([returnValue integerValue]).to.equal(1);
         });
         
-        
+
         it(@"optional methods should be called only if implemented", ^{
             id protocolMock = OCMPartialMock([[AOTestStrictDelegateObject alloc] init]);
             OCMStub([protocolMock callWithReturnValue]).andReturn(@(1));
             [[protocolMock reject] optionalCall];
 
-            [multiproxier attachObject:protocolMock];
+            AOMultiproxier <AOTestProtocol> * multiproxier = AOMultiproxierForProtocol(AOTestProtocol, protocolMock);
 
             [multiproxier optionalCall];
             

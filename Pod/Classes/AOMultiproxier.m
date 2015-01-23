@@ -12,9 +12,8 @@
 #define CACHE_ENABLED 0
 
 @interface AOMultiproxier()
-@property (nonatomic, strong) dispatch_queue_t innerQueue;
 @property (nonatomic, strong) Protocol * protocol;
-@property (nonatomic, strong) NSMutableSet * objects;
+@property (nonatomic, strong) NSOrderedSet * objects;
 
 #if CACHE_ENABLED
 @property (nonatomic, assign) CFMutableDictionaryRef respondsToSelectorCache;
@@ -25,17 +24,15 @@
 
 @implementation AOMultiproxier
 
-+ (instancetype)multiproxierForProtocol:(Protocol*)protocol
++ (instancetype)multiproxierForProtocol:(Protocol*)protocol withObjects:(NSArray*)objects
 {
-    AOMultiproxier * multiproxier = [[super alloc] initWithProtocol:protocol];
+    AOMultiproxier * multiproxier = [[super alloc] initWithProtocol:protocol objects:objects];
     return multiproxier;
 }
 
-- (instancetype)initWithProtocol:(Protocol*)protocol
+- (instancetype)initWithProtocol:(Protocol*)protocol objects:(NSArray*)objects
 {
     _protocol = protocol;
-    _objects = [NSMutableSet set];
-    _innerQueue = dispatch_queue_create("com.alessandroorru.aomultiproxier", DISPATCH_QUEUE_SERIAL);
     
 #if CACHE_ENABLED
     _respondsToSelectorCache = CFDictionaryCreateMutable(kCFAllocatorMalloc, 0, NULL, NULL);
@@ -43,6 +40,24 @@
     _methodDescriptionCache = CFDictionaryCreateMutable(kCFAllocatorMalloc, 0, NULL, NULL);
 #endif
     
+    NSMutableArray * validObjects = [NSMutableArray array];
+    
+    BOOL oneConforms = NO;
+    for (id object in objects) {
+        if ([object conformsToProtocol:protocol]) {
+            oneConforms = YES;
+        }
+        if ([self _object:object inheritsProtocolOrAncestorOfProtocol:protocol]) {
+            [validObjects addObject:object];
+        }
+    }
+
+    NSAssert(oneConforms, @"You didn't attach any object that declares itself conforming to %@. At least one is needed.", NSStringFromProtocol(protocol));
+    
+    _objects = [NSOrderedSet orderedSetWithArray:validObjects];
+    
+    if (_objects.count <= 0 || !oneConforms) return nil;
+
     return self;
 }
 
@@ -51,49 +66,13 @@
     return YES;
 }
 
-- (void)attachObject:(id)object
-{
-    if (object == nil) return;
-    if (![self _object:object inheritsProtocolOrAncestorOfProtocol:self.protocol]) {
-        NSLog(@"AOMultiproxier WARNING: tried to attach object %@ that doesn't conform to %@ or any of its ancestors", [object debugDescription], NSStringFromProtocol(self.protocol));
-        return;
-    }
-    
-    dispatch_sync(self.innerQueue, ^{
-        [self.objects addObject:object];
-    });
-}
-
-- (void)attachObjects:(NSArray *)objects
-{
-    [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self attachObject:obj];
-    }];
-}
-
-- (void)detachObject:(id)object
-{
-    if (!object) return;
-    
-    dispatch_sync(self.innerQueue, ^{
-        [self.objects removeObject:object];
-    });
-}
-
-- (void)detachAllObjects
-{
-    dispatch_sync(self.innerQueue, ^{
-        _objects = [NSMutableSet set];
-    });
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return protocol_conformsToProtocol(self.protocol, aProtocol);
 }
 
 - (NSArray *)attachedObjects
 {
-    __block NSArray * objects = nil;
-    dispatch_sync(self.innerQueue, ^{
-        objects = [self.objects allObjects];
-    });
-    return objects;
+    return [self.objects array];
 }
 
 - (void)dealloc
@@ -136,10 +115,6 @@
     CFDictionarySetValue(self.respondsToSelectorCache, selector, responds ? kCFBooleanTrue : kCFBooleanFalse);
 #endif
     return responds;
-}
-
-- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
-    return protocol_conformsToProtocol(self.protocol, aProtocol);
 }
 
 

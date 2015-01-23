@@ -25,8 +25,7 @@
     
     if (indexPath.row == 0) {
         
-        AOMultiproxier <AOTestP> * mp = AOMultiproxierForProtocol(AOTestP);
-        [mp attachObject:self];
+        AOMultiproxier <AOTestP> * mp = AOMultiproxierForProtocol(AOTestP, self);
         
         for (int i=0; i<1000000; i++) {
             [mp call];
